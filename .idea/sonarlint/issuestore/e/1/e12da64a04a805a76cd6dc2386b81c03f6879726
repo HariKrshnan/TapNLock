@@ -1,0 +1,7 @@
+
+jkotlin:S1192"KDefine a constant instead of duplicating this literal "Else block" 3 times.(Ä›©Ê8·šÊÖ/
+tkotlin:S1175"VRename this local variable to match the regular expression "^`?[_a-z][a-zA-Z0-9]*`?$".(Ó¼ß8öÜ¢Ïƒ/
+Bkotlin:S125&"Remove this commented out code.(Õ Úïúÿÿÿÿ8—ƒòÖ/
+_kotlin:S1144,";Remove this unused private "isAccessServiceEnabled" method.(ÉâŞåûÿÿÿÿ8ÿğ§Ïƒ/
+Zkotlin:S11443";Remove this unused private "isAccessibilityEnabled" method.(ŞëÜ¦8àºÄÏƒ/
+ckotlin:S14815"DRemove this unused "LIGHTFLOW_ACCESSIBILITY_SERVICE" local variable.(Ó¼ß8öÜ¢Ïƒ/

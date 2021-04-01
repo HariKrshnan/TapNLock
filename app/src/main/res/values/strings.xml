@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TapNLock</string>
+    <string name="description">By enabling this you are allowing this app to lock the screen on opening this application every time</string>
+    <string name="service_name">Lock screen service</string>
+</resources>
