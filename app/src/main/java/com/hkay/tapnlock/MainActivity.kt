@@ -1,40 +1,76 @@
 package com.hkay.tapnlock
 
-import android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.provider.Settings
+import android.provider.Settings.SettingNotFoundException
+import android.text.TextUtils.SimpleStringSplitter
 import android.widget.Toast
 
 
 class MainActivity : Activity() {
     private val actionService = ActionService()
 
-    override fun onStart() {
-        super.onStart()
-        actionService.performGlobalAction(GLOBAL_ACTION_LOCK_SCREEN)
 
-//        Toast.makeText(applicationContext, "onStart", Toast.LENGTH_SHORT).show()
-/*
-        if(!actionService.isEnabled) {
-            Toast.makeText(applicationContext, "Kindly enable the accessibility service to use this app", Toast.LENGTH_SHORT).show()
-            val intent: Intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            startActivity(intent)
-        } else {
-            Toast.makeText(applicationContext, "Else block", Toast.LENGTH_SHORT).show()
-            actionService.performGlobalAction(8)
+    private fun checkPermission(context: Context): Boolean {
+        var string: String? = null
+        val str = packageName + "/" + ActionService::class.java.canonicalName
+        val i: Int = try {
+             Settings.Secure.getInt(context.applicationContext.contentResolver, "accessibility_enabled")
+        } catch (unused: SettingNotFoundException) {
+            0
         }
-*/
-        finish()
+        val simpleStringSplitter = SimpleStringSplitter(':')
+        if (i == 1 && Settings.Secure.getString(context.applicationContext.contentResolver, "enabled_accessibility_services").also { string = it } != null) {
+            simpleStringSplitter.setString(string)
+            while (simpleStringSplitter.hasNext()) {
+                if (simpleStringSplitter.next().equals(str, ignoreCase = true)) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        Toast.makeText(applicationContext, "Activity Result", Toast.LENGTH_SHORT).show()
-        if(!actionService.isEnabled) {
-            val intent: Intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            startActivity(intent)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (!checkPermission(applicationContext)) {
+            Toast.makeText(applicationContext, " R.string.msg_info_accessibility_setting_off", Toast.LENGTH_SHORT).show()
+            startActivity(Intent("android.settings.ACCESSIBILITY_SETTINGS"))
+            Toast.makeText(applicationContext, "R.string.msg_info_accessibility_setting_guide", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(applicationContext, "permission given", Toast.LENGTH_SHORT).show()
+//            ActionService().init()
+            actionService.init()
+            finish()
+
         }
+
+    }
+
+    /* access modifiers changed from: protected */
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    /* access modifiers changed from: protected */
+    override fun onPause() {
+        super.onPause()
+    }
+
+    /* access modifiers changed from: protected */
+    override fun onResume() {
+        super.onResume()
+        if (isTaskRoot) {
+            finish()
+        }
+    }
+
+    /* access modifiers changed from: protected */
+    override fun onStop() {
+        super.onStop()
     }
 
 }
