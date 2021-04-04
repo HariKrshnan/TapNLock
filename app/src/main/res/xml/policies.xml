@@ -1,3 +1,6 @@
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:canRetrieveWindowContent="true"
-    android:description="@string/description"/>
+    android:description="@string/description"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault"
+    android:canPerformGestures="true"/>

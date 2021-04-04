@@ -43,7 +43,7 @@ class MainActivity : Activity() {
         } else {
             Toast.makeText(applicationContext, "permission given", Toast.LENGTH_SHORT).show()
 //            ActionService().init()
-            actionService.init()
+            ActionService.init()
             finish()
 
         }
