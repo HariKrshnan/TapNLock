@@ -11,9 +11,6 @@ import android.widget.Toast
 
 
 class MainActivity : Activity() {
-    private val actionService = ActionService()
-
-
     private fun checkPermission(context: Context): Boolean {
         var string: String? = null
         val str = packageName + "/" + ActionService::class.java.canonicalName
@@ -37,12 +34,9 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!checkPermission(applicationContext)) {
-            Toast.makeText(applicationContext, " R.string.msg_info_accessibility_setting_off", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.user_guide, Toast.LENGTH_SHORT).show()
             startActivity(Intent("android.settings.ACCESSIBILITY_SETTINGS"))
-            Toast.makeText(applicationContext, "R.string.msg_info_accessibility_setting_guide", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(applicationContext, "permission given", Toast.LENGTH_SHORT).show()
-//            ActionService().init()
             ActionService.init()
             finish()
 
@@ -50,27 +44,11 @@ class MainActivity : Activity() {
 
     }
 
-    /* access modifiers changed from: protected */
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    /* access modifiers changed from: protected */
-    override fun onPause() {
-        super.onPause()
-    }
-
-    /* access modifiers changed from: protected */
     override fun onResume() {
         super.onResume()
         if (isTaskRoot) {
             finish()
         }
-    }
-
-    /* access modifiers changed from: protected */
-    override fun onStop() {
-        super.onStop()
     }
 
 }

@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 
 class ActionService: AccessibilityService() {
-     var isEnabled: Boolean = false
-
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         //empty
     }
@@ -17,13 +15,12 @@ class ActionService: AccessibilityService() {
     }
 
     override fun onServiceConnected() {
-        isEnabled = true
-        accService = this;
+        accService = this
     }
 
     override fun onUnbind(intent: Intent): Boolean {
-        accService = null;
-        return super.onUnbind(intent);
+        accService = null
+        return super.onUnbind(intent)
     }
 
     private fun lockScreen() {
@@ -33,9 +30,8 @@ class ActionService: AccessibilityService() {
     companion object {
         private var accService: ActionService? = null
         fun init() {
-            val service: ActionService? = accService
             Log.i("init", "init method called")
-            service?.lockScreen()
+            accService?.lockScreen()
         }
     }
 
