@@ -15,15 +15,15 @@ class MainActivity : Activity() {
         var string: String? = null
         val str = packageName + "/" + ActionService::class.java.canonicalName
         val i: Int = try {
-             Settings.Secure.getInt(context.applicationContext.contentResolver, "accessibility_enabled")
+            Settings.Secure.getInt(context.applicationContext.contentResolver, "accessibility_enabled")
         } catch (unused: SettingNotFoundException) {
             0
         }
-        val simpleStringSplitter = SimpleStringSplitter(':')
+        val splitString = SimpleStringSplitter(':')
         if (i == 1 && Settings.Secure.getString(context.applicationContext.contentResolver, "enabled_accessibility_services").also { string = it } != null) {
-            simpleStringSplitter.setString(string)
-            while (simpleStringSplitter.hasNext()) {
-                if (simpleStringSplitter.next().equals(str, ignoreCase = true)) {
+            splitString.setString(string)
+            while (splitString.hasNext()) {
+                if (splitString.next().equals(str, ignoreCase = true)) {
                     return true
                 }
             }
@@ -39,7 +39,6 @@ class MainActivity : Activity() {
         } else {
             ActionService.init()
             finish()
-
         }
 
     }
