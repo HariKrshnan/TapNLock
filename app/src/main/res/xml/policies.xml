@@ -2,5 +2,4 @@
     android:canRetrieveWindowContent="true"
     android:description="@string/description"
     android:accessibilityFeedbackType="feedbackGeneric"
-    android:accessibilityFlags="flagDefault"
-    android:canPerformGestures="true"/>
+    android:accessibilityFlags="flagDefault"/>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">TapNLock</string>
-    <string name="description">By enabling this you are allowing this app to lock the screen on opening this application every time</string>
+    <string name="description">By enabling this option you are allowing this app to lock the screen on tapping the app icon</string>
     <string name="service_name">Lock screen</string>
     <string name="user_guide">Kindly enable the accessibility service to use this app</string>
 </resources>
