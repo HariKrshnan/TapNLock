@@ -11,8 +11,8 @@ class CustomTile: TileService() {
             startMainActivity()
         }
         else {
-            if (!MainActivity().permissionGranted) unlockAndRun(runnable)
             startMainActivity()
+            if (!MainActivity().permissionGranted) unlockAndRun(runnable)
         }
     }
 
