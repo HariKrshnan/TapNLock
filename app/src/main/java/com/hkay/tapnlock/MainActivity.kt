@@ -11,6 +11,7 @@ import android.widget.Toast
 
 
 class MainActivity : Activity() {
+    var permissionGranted = false
     private fun checkPermission(context: Context): Boolean {
         var string: String? = null
         val str = packageName + "/" + ActionService::class.java.canonicalName
@@ -24,15 +25,22 @@ class MainActivity : Activity() {
             splitString.setString(string)
             while (splitString.hasNext()) {
                 if (splitString.next().equals(str, ignoreCase = true)) {
+                    permissionGranted = true
                     return true
                 }
             }
         }
+        permissionGranted = false
         return false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lockScreen()
+    }
+
+     private fun lockScreen() {
+         Toast.makeText(this, "Lock screen", Toast.LENGTH_SHORT).show()
         if (!checkPermission(applicationContext)) {
             Toast.makeText(applicationContext, R.string.user_guide, Toast.LENGTH_SHORT).show()
             startActivity(Intent("android.settings.ACCESSIBILITY_SETTINGS"))
@@ -40,7 +48,6 @@ class MainActivity : Activity() {
             ActionService.init()
             finish()
         }
-
     }
 
     override fun onResume() {
