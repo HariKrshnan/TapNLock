@@ -40,7 +40,6 @@ class MainActivity : Activity() {
     }
 
      private fun lockScreen() {
-         Toast.makeText(this, "Lock screen", Toast.LENGTH_SHORT).show()
         if (!checkPermission(applicationContext)) {
             Toast.makeText(applicationContext, R.string.user_guide, Toast.LENGTH_SHORT).show()
             startActivity(Intent("android.settings.ACCESSIBILITY_SETTINGS"))

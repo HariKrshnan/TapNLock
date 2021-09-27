@@ -7,34 +7,14 @@ import android.service.quicksettings.TileService
 class CustomTile: TileService() {
     private val runnable: Runnable? = null
     override fun onClick() {
-        if(!isLocked) {
-            startMainActivity()
-        }
-        else {
-            startMainActivity()
-            if (!MainActivity().permissionGranted) unlockAndRun(runnable)
-        }
-    }
-
-    private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivityAndCollapse(intent)
-    }
-
-    override fun onTileRemoved() {
-        super.onTileRemoved()
-    }
-
-    override fun onTileAdded() {
-        super.onTileAdded()
-    }
-
-    override fun onStartListening() {
-        super.onStartListening()
-    }
-
-    override fun onStopListening() {
-        super.onStopListening()
+        if(!isLocked) {
+            startActivityAndCollapse(intent)
+        }
+        else {
+            startActivity(intent)
+            if (!MainActivity().permissionGranted) unlockAndRun(runnable)
+        }
     }
 }
